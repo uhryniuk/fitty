@@ -1,15 +1,41 @@
-<script>
+<script lang="ts">
   import Navbar from "../comps/Navbar.svelte";
+  import Form from "../comps/track/Form.svelte";
 
   let date = (new Date().toString().split(" ").splice(0,4)).join(" ");
+  
+  let user = "";
+  let forms = null;
 
-  let counter = 0;
+  const names = ['Nick Cage', 'Johnny Depp', 'Ryan Gosling']
+  
+  // Dumbie function for testing.
+  const change = () => {
+    const index = Math.floor(Math.random() * names.length);
+    user = names[index];
+  } 
 
-  let increment = () => {
-    counter += 1;
-  };
-
+  change();
 </script>
+
+<Navbar />
+
+<section>
+  <h1 id="date-box">{user} - {date}</h1>
+  <div id="current-nav">
+    <div class="Box" id="current-page">
+      <!-- Main Panel -->
+      <Form />
+
+    </div>
+    <div class="Box" id="current-widgets">
+  
+      <!-- Widget Panel -->
+      <Form />
+   
+    </div>
+  </div>
+</section>
 
 <style>
 
@@ -38,42 +64,3 @@
   }
 
 </style>
-
-<Navbar />
-
-<section>
-  <h1 id="date-box">{date}</h1>
-  
-  <div id="current-nav">
-    <div class="Box" id="current-page">
-      <div id="form">
-      <div class="Box-header"><h2 class="Box-title"> First thing to track</h2></div>
-      <div class="Box-footer">
-        Contains the main for to fill out the daily data.
-
-        it should go as follows:
-      
-        Sections (dropdown / collapsable)
-        - Some form data, xyz.
-        Sections (dropdown / collapsable)
-        - Some form data, xyz.
-        - Some form data, xyz.
-        </div>
-      </div>
-
-      <div id="form">
-      <div class="Box-header"><h2 class="Box-title"> Some other feature to track</h2></div>
-      <div class="Box-footer">
-        Make these sections drag and droppable to reorder them.
-        These sections should be custom components that we parse on the initial fetch request.
-        </div>
-      </div>
-
-    </div>
-   
-    <div id="current-widgets">
-      sub content box
-    </div>
-  
-  </div>
-</section>
